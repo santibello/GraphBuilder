@@ -7,73 +7,65 @@ import java.util.List;
 public class BuildGraph {
 
 	public static void main(String[] args) {
-		 // Use a string with format "(a,b) (c,d) ..." where a and b are linked
-		 // and c and d are linked.
-		BuildGraph("(3,2) (3,4) (1,2)");
+		
+		// buildGraph requires a String as input, with format "(a,b) (c,d) ..." 
+		// where a and b are linked, and c and d are linked.
+		int[][] network = buildGraph("(3,2) (3,4) (1,2)");
+
+		// Output the graph
+		for (int i = 0; i < network.length; i++) {
+			for (int j = 0; j < network.length; j++) {
+				System.out.print(network[i][j] + " ");
+
+			}
+			System.out.println();
+		}
 	}
 	
-	// Constructor to transfer the string into a matrix of integers
-	private static void BuildGraph(String inputString) {
-		
+	// Method converting a String into a G matrix representing the graph
+	public static int[][] buildGraph(String inputString) {
 		// Create an array of links, separated by spaces
 		String[] inputLinks = inputString.split(" ");
-		
+
 		// Initialise an int to store link components
 		int[][] sLink = new int[inputLinks.length][2];
-		for (int x=0; x<inputLinks.length; x++)	{
+		for (int x = 0; x < inputLinks.length; x++) {
 			System.out.println(inputLinks[x]);
 			// Use a temporary string as I don't know how to split
 			// elements of an array.
 			String tempString = inputLinks[x];
-			sLink[x][0] = Integer.parseInt(tempString.split("")[1]);
+			sLink[x][0] = Integer.parseInt(tempString.split("(|)|,")[1]);
 			sLink[x][1] = Integer.parseInt(tempString.split("")[3]);
-			//System.out.println(sLink[x][0]+" "+sLink[x][1]);
+			//System.out.println(tempString.split("(|)|,"));
+			// System.out.println(sLink[x][0]+" "+sLink[x][1]);
 		}
-		
-		// Call the constructor with a matrix of integers as index
-		BuildGraph(sLink);
-				
-	}
-	
-	// Constructor to transfer a matrix of integers into a graph.
-	private static void BuildGraph(int[][] inputIntegers) {
-		
 		// Figure out individuals in network and construct an empty graph
 
 		List<Integer> node = new ArrayList<Integer>();
-		
-		for(int i=0;i<inputIntegers.length;i++) {
-			for(int j=0; j<inputIntegers[i].length;j++) {
-				if( !node.contains(inputIntegers[i][j]) ) {
-					node.add(inputIntegers[i][j]);
+
+		for (int i = 0; i < sLink.length; i++) {
+			for (int j = 0; j < sLink[i].length; j++) {
+				if (!node.contains(sLink[i][j])) {
+					node.add(sLink[i][j]);
 				}
 			}
 		}
-		
+
 		// Sort nodes so that the smallest integer comes first.
 		Collections.sort(node);
-		
-		
+
 		// Initialise graph
 		int[][] graph = new int[node.size()][node.size()];
-		
+
 		// Assign value of 1 for any pairing given.
-		for(int i=0;i<inputIntegers.length;i++) {
-			graph[inputIntegers[i][0]-1][inputIntegers[i][1]-1] = 1;
-			graph[inputIntegers[i][1]-1][inputIntegers[i][0]-1] = 1;
-			
-			
+		for (int i = 0; i < sLink.length; i++) {
+			graph[sLink[i][0] - 1][sLink[i][1] - 1] = 1;
+			graph[sLink[i][1] - 1][sLink[i][0] - 1] = 1;
+
 		}
-		
-		// Output the graph
-		for(int i=0; i<node.size(); i++) {
-			for(int j=0;j<node.size();j++) {
-				System.out.print(graph[i][j] + " ");
-				
-			}
-			System.out.println();
+
+		return graph;
 		}
-	}		
 }
 ```
 
