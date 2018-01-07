@@ -25,15 +25,10 @@ public class BuildGraph {
 		// Create an array of links, separated by spaces
 		String[] inputLinks = inputString.split(" ");
 		
-		
 		// Initialise an int to store link components
 		int[][] sLink = new int[inputLinks.length][2];
-		
-		
 		for (int x=0; x<inputLinks.length; x++)	{
-			
 			System.out.println(inputLinks[x]);
-			
 			// Use a temporary string as I don't know how to split
 			// elements of an array.
 			String tempString = inputLinks[x];
@@ -41,8 +36,8 @@ public class BuildGraph {
 			sLink[x][1] = Integer.parseInt(tempString.split("")[3]);
 			//System.out.println(sLink[x][0]+" "+sLink[x][1]);
 		}
-		//System.out.println(sLink[1][1]);
 		
+		// Call the constructor with a matrix of integers as index
 		BuildGraph(sLink);
 				
 	}
@@ -60,12 +55,10 @@ public class BuildGraph {
 					node.add(inputIntegers[i][j]);
 				}
 			}
-			
 		}
 		
-		//System.out.println(node);
+		// Sort nodes so that the smallest integer comes first.
 		Collections.sort(node);
-		//System.out.println(node);
 		
 		
 		// Initialise graph
@@ -87,12 +80,7 @@ public class BuildGraph {
 			}
 			System.out.println();
 		}
-		
-		
-		
-	}
-		
-		
+	}		
 }
 ```
 
