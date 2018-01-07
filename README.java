@@ -7,16 +7,9 @@ import java.util.List;
 public class BuildGraph {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		/*
-		 * Use a string with format "(a,b) (c,d) ..." where a and b are linked
-		 * and c and d are linked.
-		 */
+		 // Use a string with format "(a,b) (c,d) ..." where a and b are linked
+		 // and c and d are linked.
 		BuildGraph("(3,2) (3,4) (1,2)");
-		
-	
-
 	}
 	
 	// Constructor to transfer the string into a matrix of integers
